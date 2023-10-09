@@ -1,4 +1,5 @@
-# Lab Report: Week 1, 10/3/2023, 4-6:00 pm
+# Lab Report: Week 1, 10/9/2023, 4-6:00 pm
+#Hao Tri Luu
 ---
 ## **```cd``` Command**
 1. The working directory was home. The command with no arguments should return to the home directory (which I was already in), hence, nothing happens. The working directory is the same. No errors.
