@@ -1,7 +1,7 @@
 # Lab Report: Week 1, 10/3/2023, 4-6:00 pm
 ---
 ## **```cd``` Command**
-1. The working directory was home so the command does not change directories. The command with no arguments should return to the home directory (which I was already in), hence, nothing happens. So no errors.
+1. The working directory was home, so the command does not change directories. The command with no arguments should return to the home directory (which I was already in), hence, nothing happens. So, no errors.
 ![Image](Screenshot 2023-10-03 165856.png)
 2. 
 ![Image](Screenshot 2023-10-03 170022.png)
@@ -10,12 +10,18 @@
 
 ---
 ## **ls**
-1. 
+1.
+![Image](Screenshot 2023-10-03 170339.png)
 2. 
-3. 
+![Image](Screenshot 2023-10-03 170352.png)
+3.
+![Image](Screenshot 2023-10-03 170610.png)
 
 ---
 ## **cat**
-1. 
+1.
+![Image](Screenshot 2023-10-03 170921.png)
 2. 
-3. 
+![Image](Screenshot 2023-10-03 170951.png)
+3.
+![Image](Screenshot 2023-10-03 171144.png)
