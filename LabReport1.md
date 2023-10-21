@@ -16,14 +16,14 @@
 ![Image](Screenshot 2023-10-03 170339.png)
 2. Again, the working directory was home. The command and argument included the name of a subdirectory. The result is a list of files and directories of that subdirectory, lecture1. No errors.
 ![Image](Screenshot 2023-10-03 170352.png)
-3. Again, the working directory was home. The command and argument included the name of a file that is not directly in the working directory. Hello.java is in lecture1 which itself is in home. It is unreachable by the working directory. So it results in an error.
-![Image](Screenshot 2023-10-03 170610.png)
+3. This time the working directory was messages. The command and argument included the name of a file found directly in the working directory. All it does is output the name of the file. No errors.
+![Image](Screenshot 2023-10-21 152001.png)
 
 ---
 ## **```cat``` Command**
-1. The working directory was home. The command with no argument stops taking terminal inputs and does no output. I tried to clear the terminal but unix commands were unavailable for that reason. Not an error.
-![Image](Screenshot 2023-10-03 170921.png)
-2. Again, the working directory is home. The command and argument includes the name of a subdirectory. The command outputs accordingly, a message telling us that the argument passed is a directory. Not an error.
+1. The working directory was messages. The command with no argument waits for terminal inputs from the user. After typing some commands, it outputs them. Using ctrl+C allows me to exit out of the command.
+![Image]Screenshot 2023-10-21 152039.png)
+2. The working directory was home. The command and argument include the name of a subdirectory. The command outputs accordingly, a message telling us that the argument passed is a directory. This is an error because the content of directories cannot be concatenated.
 ![Image](Screenshot 2023-10-03 170951.png)
-3. Again, the working directory is home. The command and argument includes the name of a file within a subdirectory. As such, it outputs a message saying that there is no file. This is because the file is not directly accessible by the working directory. Not an error.
-![Image](Screenshot 2023-10-03 171144.png)
+3. This time the working directory was lecture1. The command and argument include the name of a file directly in the working directory. The command reads and prints out the content of the java file, Hello.java. No errors.
+![Image](Screenshot 2023-10-21 152303.png)
