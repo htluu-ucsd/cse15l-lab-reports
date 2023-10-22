@@ -32,4 +32,4 @@ My code for StringServer.java:
 
 ---
 ## Part 3
-From weeks 2-3, I learned a lot more about hosting remote servers that I could access from my local device.
+From weeks 2-3, I learned a lot more about hosting remote servers that I could access from my local device. I knew about "cloud" hosted computers beforehand but I was not aware that I could host my own server and do things remotely and locally together. I also learned to get keys for my local machine so that I would need to type in my password from my main computer.
