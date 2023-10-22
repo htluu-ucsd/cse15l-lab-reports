@@ -21,7 +21,14 @@ My code for StringServer.java:
 ---
 ## Part 2
 ## **```ls``` Command**
+### Private Key:
+![Image](Screenshot 2023-10-21 202433.png)
 
+### Public Key:
+![Image](Screenshot 2023-10-21 203157.png)
+
+### Login:
+![Image](Screenshot 2023-10-21 202018.png)
 
 ---
 ## Part 3
