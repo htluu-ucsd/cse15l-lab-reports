@@ -8,15 +8,15 @@ My code for StringServer.java:
 
 ### First add:
 ![Image](Screenshot 2023-10-21 193246.png)
-- The only method in my code that is called would be handleRequest().
-- The relevant argument for the method is the URL. The relevant fields are: wordList, which is what is printed on the webpage, and listNumber, which is for the list number.
-- Each of the relevant fields are updated after each method. For listNumber, the int is incremented by 1 so that the list starts at 1. For wordList, the string concatenates listNumber, period, the added string, and the escape sequence to add a new line. The string is 1 line.
+- The only method in my code that is called would be `handleRequest()`.
+- The relevant argument for the method is the `URL`. The relevant fields are: `wordList`, which is what is printed on the webpage, and `listNumber`, which is for the list number.
+- Each of the relevant fields are updated after each method. For `listNumber`, the int is incremented by 1 so that the list starts at 1. For `wordList`, the string concatenates listNumber, period, the added string `My first sentence`, and the escape sequence to add a new line. The string is 1 line.
 
 ### Second add:
 ![Image](Screenshot 2023-10-21 193300.png)
-- The only method in my code that is called would be handleRequest().
-- The relevant argument for the method is the URL. The relevant fields are: wordList, which is what is printed on the webpage, and listNumber, which is for the list number.
-- Each of the relevant fields are updated after each method. For listNumber, the int is incremented by 1 so that the list starts at 1 and goes to 2. For wordList, the string concatenates listNumber, period, the added string, and the escape sequence to add a new line. Now the string is 2 lines.
+- The only method in my code that is called would be `handleRequest()`.
+- The relevant argument for the method is the `URL`. The relevant fields are: `wordList`, which is what is printed on the webpage, and `listNumber`, which is for the list number.
+- Each of the relevant fields are updated after each method. For `listNumber`, the int is incremented by 1 so that the list starts at 1 and goes to 2. For `wordList`, the string concatenates `listNumber`, period, the added string `The number 3`, and the escape sequence to add a new line. Now the string is 2 lines.
 
 ---
 ## Part 2
@@ -26,6 +26,7 @@ My code for StringServer.java:
 
 ### Public Key:
 ![Image](Screenshot 2023-10-21 203157.png)
+The public key would be `id_rsa_pub`
 
 ### Login:
 ![Image](Screenshot 2023-10-21 202018.png)
