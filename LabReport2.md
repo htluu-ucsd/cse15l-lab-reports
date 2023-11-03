@@ -29,7 +29,7 @@ My code for StringServer.java:
 The public key would be `id_rsa_pub`
 
 ### Login:
-![Image](Screenshot 2023-10-21 202018.png)
+![Image](Screenshot 2023-10-21 132658.png)
 
 ---
 ## Part 3
