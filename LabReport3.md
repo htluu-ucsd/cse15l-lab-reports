@@ -29,10 +29,10 @@ public void testReversedLongArray(){
 The result of running the debugger is that no bugs are caught and the terminal just prints the runtime.
 
 Screenshot with symptom:
-![Image](Screenshot 2023-11-05 175422)
+![Image](Screenshot 2023-11-05 175422.png)
 
 Screenshot with passing test:
-![Image](Screenshot 2023-11-05 175457)
+![Image](Screenshot 2023-11-05 175457.png)
 
 The original code is:
 ```
