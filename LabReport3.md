@@ -59,7 +59,7 @@ The issue was fixed because in the code, the array `newArray` is supposed to sto
 
 ---
 ## Part 2
-I googled and used: https://www.geeksforgeeks.org/grep-command-in-unixlinux/ to research each of the `grep` commands.
+I googled and used: [https://www.geeksforgeeks.org/grep-command-in-unixlinux/](https://www.geeksforgeeks.org/grep-command-in-unixlinux/) to research each of the `grep` commands.
 
 The first option I explored was `-v` which is described as printing the lines that do not match the given string. I used: `grep -v "biomed" technical` as an input and got `grep: technical: Is a directory` as an output. This is because the `grep` command is for files not directories (for the other commands, I will not try it on directories as the result is redundant). I then used `grep -v -c "1" technical/biomed/*.txt` where `-v` is the test option and `-c` is an additional option that only counts how many lines in each file. The output is:
 ```
