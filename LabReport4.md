@@ -42,5 +42,6 @@ Seeing that I worked, I want to commit and push the changes to my repository. So
 ![Image](Screenshot 2023-11-19 131329.png)
 
 ---
+## Results
 As we can see from my github, the changes were pushed through:
 ![Image](Screenshot 2023-11-19 131329.png)
