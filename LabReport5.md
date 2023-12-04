@@ -49,6 +49,33 @@ class ListExamples {
 }
 ```
 
+### After fixing first bug but before fixing hidden bug `ListExamples.java` file:
+
+```
+import java.util.ArrayList;
+import java.util.List;
+
+class ListExamples {
+
+  static List<String> crissCross(List<String> list1, List<String> list2) {
+        List<String> output = new ArrayList<>(); //(list1.size()+list2.size());
+
+        for (String i: list1){
+          output.add(i);
+        }
+
+        // Insert elements from list2 in reverse order
+        for (int i = 0; i < list2.size(); i++) {
+            output.add(i * 2 + 1, list2.get(list2.size() - 1 - i));
+            //System.out.println("Element added: " + list2.get(list2.size() - 1 - i) + ", at index: " + output.indexOf(list2.get(list2.size() - 1 - i)));
+        }
+
+        return output;
+  }
+}
+```
+
+
 ### Before fixing bug `TestListExamples.java` file
 
 ```
@@ -121,7 +148,7 @@ for (int i = 0; i < list2.size(); i++) {
     output.add(i * 2 + 1, list2.get(list2.size() - 1 - i));
 ```
 
-The first change was changing the range of `list2` from `i < list2.size() - 1` to `i < list2.size()` because the original was stopping short of one element in the second list. The second change was changing the `i * 2` to `i * 2 + 1` in the second line because the former started with the element at index 0 when it was supposed to start with the element at index 1. The unexpected symptom that appeared after we made the above changes is corrected with a new conditional statement that checks `output.size() < i * 2 + 1` if the index to insert an element into lies outside the range of the output array. If it does, then the elements should just be appended to the end, instead of inserting at an index that does not exist.
+The first change was changing the range of `list2` from `i < list2.size() - 1` to `i < list2.size()` because the original was stopping short of one element in the second list. The second change was changing the `i * 2` to `i * 2 + 1` in the second line because the former started with the element at index 0 when it was supposed to start with the element at index 1. The unexpected symptom that appeared after we made the above changes is corrected with a new conditional statement that checks `output.size() < i * 2 + 1` if the index to insert an element into lies outside the range of the output array. If it does, then the elements should just be appended to the end, instead of inserting at an index that does not exist. This goes to show that doing multiple tests are a good measure because we become aware of some bugs only after addressing a different bug.
 
 None of the other files were modified.
 
