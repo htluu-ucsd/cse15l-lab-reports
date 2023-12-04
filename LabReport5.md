@@ -3,14 +3,14 @@
 
 ---
 ## Part 1
-1. Student question:
+1) Student question:
 Hi, I'm trying to test and correct this implementation of the `crissCross()` method in `ListExamples.java` which takes 2 arraylists then merges them into a new arraylist such that the elements added are alternating, starting with the first index of the first arraylist, then the last index of the second array. Then second element of the first, then second last element of the second. If there are no more elements in one of the arraylists, add the rest of elements to the end. The resulting arraylist does not match the expected.
 ![Image](Screenshot 2023-12-03 174237.png)
 
-2. TA Response:
+2) TA Response:
 Have you tried testing `merge()` on 2 arrays in all possible scenarios? Where array 1 is longer than 2, where array 2 is longer than 1, and where they're both equal. It may also be advantageous to have multiple `System.out.println()` statements that print the element and their indices. Read the wrong output arraylist carefully and compare to the expectedd and maybe you can identify the issues.
 
-3. Terminal output of resulting attempt after typing `bash grade.sh` + `<Enter>` into the terminal:
+3) Terminal output of resulting attempt after typing `bash grade.sh` + `<Enter>` into the terminal:
 
 ```
 Compiled successfully!
@@ -56,7 +56,7 @@ I then proceed to modify the `ListExamples.java` file at the line: `i < list2.si
 ![Image](Screenshot 2023-12-03 173224.png)
 This is a hidden `IndexOutOfBoundsException` bug that could only be found after we addressed the above issues. It was caught in the `testCrissCrossSecondLonger()` method. The last bit of information we find is that if the `second` arraylist is longer than the `first`, the elements are being inserted into indices that do not exist.
 
-4. The file structure:
+4) The file structure:
 The system and file structure are similar to the one provided in lab. We have the directory `list-examples-grader` where the files are located, the program testing and debugging is taking place, and is the working directory from which we run the bash script. Inside, we have the `lib` subdirectory of `list-examples-grader` where the `hamcrest-core-1.3.jar` and `junit-4.13.2.jar` files are located. These files are necessary to run JUnit tests. Also inside `list-examples-grader` directory, we have the `ListExamples.java` file which is the java project to test and debug, and we have the `TestListExamples.java` file where our JUnit tests are written to test that `ListExamples.java` methods are working as intended. Also inside `list-examples-grader` directory, we have the `grade.sh` bash script that creates the `grading-area` directory within `list-examples-grader` directory; then copies the `lib` directory and both java files into it. The script then compiles and runs the java files. It prints into the terminal, the result of the JUnit test.
 
 I typed `tree` + `<Enter>` in my `home directory` and got the following output:
