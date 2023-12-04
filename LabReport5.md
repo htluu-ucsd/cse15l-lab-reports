@@ -10,7 +10,7 @@ Hi, I'm trying to test and correct this implementation of the `crissCross()` met
 2. TA Response:
 Have you tried testing `merge()` on 2 arrays in all possible scenarios? Where array 1 is longer than 2, where array 2 is longer than 1, and where they're both equal. It may also be advantageous to have multiple `System.out.println()` statements that print the element and their indices. Read the wrong output arraylist carefully and compare to the expectedd and maybe you can identify the issues.
 
-3. Terminal output of resulting attempt:
+3. Terminal output of resulting attempt after typing `bash grade.sh` + `<Enter>` into the terminal:
 ```
 Compiled successfully!
 JUnit version 4.13.2
@@ -41,15 +41,14 @@ at TestListExamples.testCrissCrossEqualLength(TestListExamples.java:14)
 
 FAILURES!!!
 Tests run: 3,  Failures: 3
-
-[user@sahara ~/list-examples-grader]
 ```
+
 ![Image](Screenshot 2023-12-03 175248.png)
 ![Image](Screenshot 2023-12-03 175252.png)
 I modified the files `TestListExamples.java` and `ListExamples.java`. The file `TestListExamples.java` has 3 methods `testCrissCrossFirstLonger()`, `testCrissCrossSecondLonger()`, and `testCrissCrossEqualLength()`. The 1st method has `first` arraylist with elements `"a", "c", "e", "f"`, `second` arraylist with elements `"d", "b"`; the 2nd method has `first` arraylist with elements `"a", "c"`, `second` arraylist with elements `"f", "e", "d", "b"`; and the 3rd method has `first` arraylist with elements `"a", "c", "e"`, `second` arraylist with elements `"f", "d", "b"`.
 The `ListExamples.java` has a new line `System.out.println("Element added: " + list2.get(list2.size() - 1 - i) + ", at index: " + output.indexOf(list2.get(list2.size() - 1 - i)));`, which will print the indices and values of each element to be added to the resulting `merge` arraylist.
 
-I typed `bash grade.sh` + `<Enter>` again.
+I typed `bash grade.sh` + `<Enter>` as mentioned above.
 Running the tests, I can see in all 3 methods, the elements of the `second` arraylist are in even indices except for the first element of the `second` arraylist which was not added to the `merge` arraylist at all. Looking specifically at `testCrissCrossEqualLength()`, we see the `merge` arraylist `b, a, d, c, e` and compare it to the `expected` arraylist `a, b, c, d, e, f`. Let me remind you that in `testCrissCrossEqualLength()`, we have `first` arraylist with elements `"a", "c", "e"`, `second` arraylist with elements `"f", "d", "b"`. We can gather that the issue is that the `second` arraylist elements are being inserted into the even indices instead of the odd ones. We also know that the loop that adds the elements of the `second` arraylist is terminating one element short, the element at the first index of `second`.
 I then proceed to modify the `ListExamples.java` file at the line: `i < list2.size() - 1` to `i < list2.size()` and at the line `i * 2` to `i * 2 + 1`. More detail for the java files are given at 4 below.
 
