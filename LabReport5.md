@@ -127,7 +127,7 @@ fi
 java -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore TestListExamples
 ```
 
-The command I used in the terminal was `bash grade.sh` + `<Enter>` which compiled the java files and ran the JUnit tests in `ListExamples.java` and printed the result to the terminal.
+The command I used in the terminal was `bash grade.sh` + `<Enter>` which compiled the java files and ran the JUnit tests in `TestListExamples.java` and printed the result to the terminal.
 
 Following the TA suggestion, I modified the `TestListExamples.java` file and added more tests:
 ```
@@ -169,7 +169,6 @@ public class TestListExamples {
 }
 ```
 
-
 To fix the bug, I had to change 2 lines in the `ListExamples.java` file and add a new conditional:
 
 ```
@@ -178,7 +177,6 @@ for (int i = 0; i < list2.size() - 1; i++) {
 ```
 
 to the following:
-
 ```
 for (int i = 0; i < list2.size(); i++) {
     if (output.size() < i * 2 + 1){
@@ -195,4 +193,4 @@ The `test.sh` file was unmodified.
 
 ---
 ## Part 2
-Something nice and useful that I learned was when in JDB, the `step` command allows me to walk through java code, line by line. This is neat because if I have code in a file that calls code from another file or even library, the command shows me what goes on in those files or library. An example would be if I called a method from an external class in my `main` method in one class. The `step` command will execute the line where that method is called and then go to first line in that called method. This is useful for debuggin because I can view the process working instead of just the end result. I found out about this when practicing for Skill Demo 4 because one line of code called a method from a different file and I needed to figure out what variables had what values.
+Something nice and useful that I learned was when in JDB, the `step` command allows me to walk through java code, line by line. This is neat because if I have code in a file that calls code from another file or even library, the command shows me what goes on in those files or library. An example would be if I called a method from an external class in my `main` method in one class. The `step` command will execute the line where that method is called and then go to first line in that called method. This is useful for debugging because I can view the process working instead of just the end result. I found out about this when practicing for Skill Demo 4 because one line of code called a method from a different file and I needed to figure out what variables had what values.
