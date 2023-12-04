@@ -11,8 +11,8 @@ Hi, I'm trying to test and correct this implementation of the `crissCross()` met
 Have you tried testing `merge()` on 2 arrays in all possible scenarios? Where array 1 is longer than 2, where array 2 is longer than 1, and where they're both equal. It may also be advantageous to have multiple `System.out.println()` statements that print the element and their indices.
 
 3. Terminal output of resulting attempt:
-![Image](Screenshot 2023-12-03 172355.png)
-![Image](Screenshot 2023-12-03 172359.png)
+![Image](Screenshot 2023-12-03 175248.png)
+![Image](Screenshot 2023-12-03 175252.png)
 From this information, we can gather that the issue is that the second arraylist elements are being inserted into the even indices instead of the odd ones. We also know that the loop that adds the elements of the second arraylist is terminating one element short. After making changes to address the above issue and testing again:
 ![Image](Screenshot 2023-12-03 173224.png)
 This is a hidden bug that could only be found after we addressed the above issues. The last bit of information we find is that if the second arraylist is longer than the first, the elements are being inserted into indices that do not exist.
