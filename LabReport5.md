@@ -9,10 +9,11 @@
 2. Have you tried testing `merge()` on 2 arrays in all possible scenarios? Where array 1 is longer than 2, where array 2 is longer than 1, and where they're both equal. It may also be advantageous to have multiple `System.out.println()` statements that print the element.
 
 3. Terminal output of resulting attempt:
-![Image](Screenshot 2023-12-03 163453.png)
+![Image](Screenshot 2023-12-03 171527.png)
+![Image](Screenshot 2023-12-03 171532.png)
 From this information, we can gather that the issue is that the second arraylist elements are being inserted into the even indices instead of the odd ones. We also know that the loop that adds the elements of the second arraylist is terminating one element short.
 
-4.
+5.
 The system and file structure are similar to the one provided in lab. We have the directory `list-examples-grader` where the files are located, the program testing and debugging is taking place, and is the working directory from which we run the bash script. Inside, we have the `lib` subdirectory of `list-examples-grader` where the `hamcrest-core-1.3.jar` and `junit-4.13.2.jar` files are located. These files are necessary to run JUnit tests. Also inside `list-examples-grader` directory, we have the `ListExamples.java` file which is the java project to test and debug, and we have the `TestListExamples.java` file where our JUnit tests are written to test that `ListExamples.java` methods are working as intended. Also inside `list-examples-grader` directory, we have the `grade.sh` bash script that creates the `grading-area` directory within `list-examples-grader` directory; then copies the `lib` directory and both java files into it. The script then compiles and runs the java files. It prints into the terminal, the result of the JUnit test.
 
 The file structure:
