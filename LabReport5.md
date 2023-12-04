@@ -11,6 +11,7 @@ Hi, I'm trying to test and correct this implementation of the `crissCross()` met
 Have you tried testing `merge()` on 2 arrays in all possible scenarios? Where array 1 is longer than 2, where array 2 is longer than 1, and where they're both equal. It may also be advantageous to have multiple `System.out.println()` statements that print the element and their indices. Read the wrong output arraylist carefully and compare to the expectedd and maybe you can identify the issues.
 
 3. Terminal output of resulting attempt after typing `bash grade.sh` + `<Enter>` into the terminal:
+
 ```
 Compiled successfully!
 JUnit version 4.13.2
