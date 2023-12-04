@@ -4,20 +4,26 @@
 ---
 ## Part 1
 1. Student question:
-Hi, I'm trying to test and correct this implementation of the `crissCross()` method in `ListExamples.java` which takes 2 arraylists then merges them into a new arraylist such that the elements added are alternating, starting with the first index of the first arraylist, then the last index of the second array. Then second element of the first, then second last element of the second. If there are no more elements in one of the arraylists, add the rest of elements to the end.
+Hi, I'm trying to test and correct this implementation of the `crissCross()` method in `ListExamples.java` which takes 2 arraylists then merges them into a new arraylist such that the elements added are alternating, starting with the first index of the first arraylist, then the last index of the second array. Then second element of the first, then second last element of the second. If there are no more elements in one of the arraylists, add the rest of elements to the end. The resulting arraylist does not match the expected.
 ![Image](Screenshot 2023-12-03 174237.png)
 
 2. TA Response:
-Have you tried testing `merge()` on 2 arrays in all possible scenarios? Where array 1 is longer than 2, where array 2 is longer than 1, and where they're both equal. It may also be advantageous to have multiple `System.out.println()` statements that print the element and their indices.
+Have you tried testing `merge()` on 2 arrays in all possible scenarios? Where array 1 is longer than 2, where array 2 is longer than 1, and where they're both equal. It may also be advantageous to have multiple `System.out.println()` statements that print the element and their indices. Read the wrong output arraylist carefully and compare to the expectedd and maybe you can identify the issues.
 
 3. Terminal output of resulting attempt:
 ![Image](Screenshot 2023-12-03 175248.png)
 ![Image](Screenshot 2023-12-03 175252.png)
-From this information, we can gather that the issue is that the `second` arraylist elements are being inserted into the even indices instead of the odd ones. We also know that the loop that adds the elements of the `second` arraylist is terminating one element short. After making changes to address the above issue and testing again:
-![Image](Screenshot 2023-12-03 173224.png)
-This is a hidden `IndexOutOfBoundsException` bug that could only be found after we addressed the above issues. The last bit of information we find is that if the `second` arraylist is longer than the `first`, the elements are being inserted into indices that do not exist.
+I modified the files `TestListExamples.java` and `ListExamples.java`. The file `TestListExamples.java` has 3 methods `testCrissCrossFirstLonger()`, `testCrissCrossSecondLonger()`, and `testCrissCrossEqualLength()`. The 1st method has `first` arraylist with elements `"a", "c", "e", "f"`, `second` arraylist with elements `"d", "b"`; the 2nd method has `first` arraylist with elements `"a", "c"`, `second` arraylist with elements `"f", "e", "d", "b"`; and the 3rd method has `first` arraylist with elements `"a", "c", "e"`, `second` arraylist with elements `"f", "d", "b"`.
+The `ListExamples.java` has a new line `System.out.println("Element added: " + list2.get(list2.size() - 1 - i) + ", at index: " + output.indexOf(list2.get(list2.size() - 1 - i)));`, which will print the indices and values of each element to be added to the resulting `merge` arraylist.
 
-4. The file structure:
+I typed `bash grade.sh` + `<Enter>` again.
+Running the tests, I can see in all 3 methods, the elements of the `second` arraylist are in even indices except for the first element of the `second` arraylist which was not added to the `merge` arraylist at all. Looking specifically at `testCrissCrossEqualLength()`, we see the `merge` arraylist `b, a, d, c, e` and compare it to the `expected` arraylist `a, b, c, d, e, f`. Let me remind you that in `testCrissCrossEqualLength()`, we have `first` arraylist with elements `"a", "c", "e"`, `second` arraylist with elements `"f", "d", "b"`. We can gather that the issue is that the `second` arraylist elements are being inserted into the even indices instead of the odd ones. We also know that the loop that adds the elements of the `second` arraylist is terminating one element short, the element at the first index of `second`.
+I then proceed to modify the `ListExamples.java` file at the line: `i < list2.size() - 1` to `i < list2.size()` and at the line `i * 2` to `i * 2 + 1`. More detail for the java files are given at 4 below.
+
+![Image](Screenshot 2023-12-03 173224.png)
+This is a hidden `IndexOutOfBoundsException` bug that could only be found after we addressed the above issues. It was caught in the `testCrissCrossSecondLonger()` method. The last bit of information we find is that if the `second` arraylist is longer than the `first`, the elements are being inserted into indices that do not exist.
+
+5. The file structure:
 The system and file structure are similar to the one provided in lab. We have the directory `list-examples-grader` where the files are located, the program testing and debugging is taking place, and is the working directory from which we run the bash script. Inside, we have the `lib` subdirectory of `list-examples-grader` where the `hamcrest-core-1.3.jar` and `junit-4.13.2.jar` files are located. These files are necessary to run JUnit tests. Also inside `list-examples-grader` directory, we have the `ListExamples.java` file which is the java project to test and debug, and we have the `TestListExamples.java` file where our JUnit tests are written to test that `ListExamples.java` methods are working as intended. Also inside `list-examples-grader` directory, we have the `grade.sh` bash script that creates the `grading-area` directory within `list-examples-grader` directory; then copies the `lib` directory and both java files into it. The script then compiles and runs the java files. It prints into the terminal, the result of the JUnit test.
 
 I ran `tree` in my `home directory` and got the following output:
