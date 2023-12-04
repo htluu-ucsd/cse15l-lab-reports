@@ -5,7 +5,7 @@
 ## Part 1
 1. Student question:
 Hi, I'm trying to test and correct this implementation of the `crissCross()` method in `ListExamples.java` which takes 2 arraylists then merges them into a new arraylist such that the elements added are alternating, starting with the first index of the first arraylist, then the last index of the second array. Then second element of the first, then second last element of the second. If there are no more elements in one of the arraylists, add the rest of elements to the end.
-![Image](Screenshot 2023-12-03 163155.png)
+![Image](Screenshot 2023-12-03 174237.png)
 
 2. TA Response:
 Have you tried testing `merge()` on 2 arrays in all possible scenarios? Where array 1 is longer than 2, where array 2 is longer than 1, and where they're both equal. It may also be advantageous to have multiple `System.out.println()` statements that print the element.
@@ -86,8 +86,7 @@ import java.util.List;
 
 public class TestListExamples {
   @Test(timeout = 500)
-
-  public void testCrissCrossEqualLength() {
+  public void testCrissCross() {
     List<String> first = Arrays.asList("a", "c", "e");
     List<String> second = Arrays.asList("f", "d", "b");
     List<String> merged = ListExamples.crissCross(first, second);
@@ -130,6 +129,47 @@ java -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnit
 
 The command I used in the terminal was `bash grade.sh` + `<Enter>` which compiled the java files and ran the JUnit tests in `ListExamples.java` and printed the result to the terminal.
 
+Following the TA suggestion, I modified the `TestListExamples.java` file and added more tests:
+```
+import static org.junit.Assert.*;
+import org.junit.*;
+import java.util.Arrays;
+import java.util.List;
+
+public class TestListExamples {
+  @Test(timeout = 500)
+  public void testCrissCrossEqualLength() {
+    List<String> first = Arrays.asList("a", "c", "e");
+    List<String> second = Arrays.asList("f", "d", "b");
+    List<String> merged = ListExamples.crissCross(first, second);
+    List<String> expected = Arrays.asList("a", "b", "c", "d", "e", "f");
+
+    assertEquals(expected, merged);
+  }
+
+  @Test(timeout = 500)
+  public void testCrissCrossFirstLonger() {
+    List<String> first = Arrays.asList("a", "c", "e", "f");
+    List<String> second = Arrays.asList("d", "b");
+    List<String> merged = ListExamples.crissCross(first, second);
+    List<String> expected = Arrays.asList("a", "b", "c", "d", "e", "f");
+
+    assertEquals(expected, merged);
+  }
+
+  @Test(timeout = 500)
+  public void testCrissCrossSecondLonger() {
+    List<String> first = Arrays.asList("a", "c");
+    List<String> second = Arrays.asList("f", "e", "d", "b");
+    List<String> merged = ListExamples.crissCross(first, second);
+    List<String> expected = Arrays.asList("a", "b", "c", "d", "e", "f");
+
+    assertEquals(expected, merged);
+  }
+}
+```
+
+
 To fix the bug, I had to change 2 lines in the `ListExamples.java` file and add a new conditional:
 
 ```
@@ -145,12 +185,13 @@ for (int i = 0; i < list2.size(); i++) {
         output.add(list2.get(list2.size() - 1 - i));
         continue;
     }
-    output.add(i * 2 + 1, list2.get(list2.size() - 1 - i));
+    output.add(i * 2 + 1, list2.get(list2.size() - 1 - I));
+    System.out.println("Element added: " + list2.get(list2.size() - 1 - i) + ", at index: " + output.indexOf(list2.get(list2.size() - 1 - i)));
 ```
 
-The first change was changing the range of `list2` from `i < list2.size() - 1` to `i < list2.size()` because the original was stopping short of one element in the second list. The second change was changing the `i * 2` to `i * 2 + 1` in the second line because the former started with the element at index 0 when it was supposed to start with the element at index 1. The unexpected symptom that appeared after we made the above changes is corrected with a new conditional statement that checks `output.size() < i * 2 + 1` if the index to insert an element into lies outside the range of the output array. If it does, then the elements should just be appended to the end, instead of inserting at an index that does not exist. This goes to show that doing multiple tests are a good measure because we become aware of some bugs only after addressing a different bug.
+The first change was changing the range of `list2` from `i < list2.size() - 1` to `i < list2.size()` because the original was stopping short of one element in the second list. The second change was changing the `i * 2` to `i * 2 + 1` in the second line because the former started with the element at index 0 when it was supposed to start with the element at index 1. The unexpected symptom that appeared after we made the above changes is corrected with a new conditional statement that checks `output.size() < i * 2 + 1` if the index to insert an element into lies outside the range of the output array. If it does, then the elements should just be appended to the end, instead of inserting at an index that does not exist. This goes to show that doing multiple tests are a good measure because we become aware of some bugs only after addressing a different bug. The last line with `System.out.println()` was for testing purposes, to see the elements and indices and is not needed to get the correct output but was useful for figuring out what went wrong.
 
-None of the other files were modified.
+The `test.sh` file was unmodified.
 
 ---
 ## Part 2
