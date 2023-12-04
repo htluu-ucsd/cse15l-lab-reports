@@ -41,7 +41,7 @@ I ran `tree` in my `home directory` and got the following output:
 ```
 
 Image of file structure:
-![Image](Screenshot 2023-12-03 164924.png)
+![Image](Screenshot 2023-12-04 112331.png)
 
 ### Before fixing bug `ListExamples.java` file:
 
