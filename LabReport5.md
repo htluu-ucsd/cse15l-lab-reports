@@ -13,11 +13,11 @@ Have you tried testing `merge()` on 2 arrays in all possible scenarios? Where ar
 3. Terminal output of resulting attempt:
 ![Image](Screenshot 2023-12-03 172355.png)
 ![Image](Screenshot 2023-12-03 172359.png)
-From this information, we can gather that the issue is that the second arraylist elements are being inserted into the even indices instead of the odd ones. We also know that the loop that adds the elements of the second arraylist is terminating one element short. After making changes and testing again:
-![Image](Screenshot 2023-12-03 172355.png)
-The last bit of information we find is that if the second arraylist is longer than the first,
+From this information, we can gather that the issue is that the second arraylist elements are being inserted into the even indices instead of the odd ones. We also know that the loop that adds the elements of the second arraylist is terminating one element short. After making changes to address the above issue and testing again:
+![Image](Screenshot 2023-12-03 173224.png)
+This is a hidden bug that could only be found after we addressed the above issues. The last bit of information we find is that if the second arraylist is longer than the first, the elements are being inserted into indices that do not exist.
 
-5.
+4.
 The system and file structure are similar to the one provided in lab. We have the directory `list-examples-grader` where the files are located, the program testing and debugging is taking place, and is the working directory from which we run the bash script. Inside, we have the `lib` subdirectory of `list-examples-grader` where the `hamcrest-core-1.3.jar` and `junit-4.13.2.jar` files are located. These files are necessary to run JUnit tests. Also inside `list-examples-grader` directory, we have the `ListExamples.java` file which is the java project to test and debug, and we have the `TestListExamples.java` file where our JUnit tests are written to test that `ListExamples.java` methods are working as intended. Also inside `list-examples-grader` directory, we have the `grade.sh` bash script that creates the `grading-area` directory within `list-examples-grader` directory; then copies the `lib` directory and both java files into it. The script then compiles and runs the java files. It prints into the terminal, the result of the JUnit test.
 
 The file structure:
@@ -121,7 +121,7 @@ for (int i = 0; i < list2.size(); i++) {
     output.add(i * 2 + 1, list2.get(list2.size() - 1 - i));
 ```
 
-The first change was changing the range of `list2` from `i < list2.size() - 1` to `i < list2.size()` because the original was stopping short of one element in the second list. The second change was changing the `i * 2` to `i * 2 + 1` in the second line because the former started with the element at index 0 when it was supposed to start with the element at index 1. The new conditional statement checks `output.size() < i * 2 + 1` if the index to insert an element into lies outside the range of the output array. If it does, then the elements should just be appended to the end, instead of inserting at an index that does not exist.
+The first change was changing the range of `list2` from `i < list2.size() - 1` to `i < list2.size()` because the original was stopping short of one element in the second list. The second change was changing the `i * 2` to `i * 2 + 1` in the second line because the former started with the element at index 0 when it was supposed to start with the element at index 1. The unexpected symptom that appeared after we made the above changes is corrected with a new conditional statement that checks `output.size() < i * 2 + 1` if the index to insert an element into lies outside the range of the output array. If it does, then the elements should just be appended to the end, instead of inserting at an index that does not exist.
 
 None of the other files were modified.
 
