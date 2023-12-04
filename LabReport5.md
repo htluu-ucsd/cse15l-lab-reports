@@ -11,6 +11,39 @@ Hi, I'm trying to test and correct this implementation of the `crissCross()` met
 Have you tried testing `merge()` on 2 arrays in all possible scenarios? Where array 1 is longer than 2, where array 2 is longer than 1, and where they're both equal. It may also be advantageous to have multiple `System.out.println()` statements that print the element and their indices. Read the wrong output arraylist carefully and compare to the expectedd and maybe you can identify the issues.
 
 3. Terminal output of resulting attempt:
+```
+Compiled successfully!
+JUnit version 4.13.2
+.E.E.E
+Time: 0.008
+There were 3 failures:
+1) testCrissCrossFirstLonger(TestListExamples)
+java.lang.AssertionError: expected:<[a, b, c, d, e, f]> but was:<[b, a, c, e, f]>
+at org.junit.Assert.fail(Assert.java:89)
+at org.junit.Assert.failNotEquals(Assert.java:835)
+at org.junit.Assert.assertEquals(Assert.java:120)
+at org.junit.Assert.assertEquals(Assert.java:146)
+at TestListExamples.testCrissCrossFirstLonger(TestListExamples.java:24)
+2) testCrissCrossSecondLonger(TestListExamples)
+java.lang.AssertionError: expected:<[a, b, c, d, e, f]> but was:<[b, a, d, c, e]>
+at org.junit.Assert.fail(Assert.java:89)
+at org.junit.Assert.failNotEquals(Assert.java:835)
+at org.junit.Assert.assertEquals(Assert.java:120)
+at org.junit.Assert.assertEquals(Assert.java:146)
+at TestListExamples.testCrissCrossSecondLonger(TestListExamples.java:34)
+3) testCrissCrossEqualLength(TestListExamples)
+java.lang.AssertionError: expected:<[a, b, c, d, e, f]> but was:<[b, a, d, c, e]>
+at org.junit.Assert.fail(Assert.java:89)
+at org.junit.Assert.failNotEquals(Assert.java:835)
+at org.junit.Assert.assertEquals(Assert.java:120)
+at org.junit.Assert.assertEquals(Assert.java:146)
+at TestListExamples.testCrissCrossEqualLength(TestListExamples.java:14)
+
+FAILURES!!!
+Tests run: 3,  Failures: 3
+
+[user@sahara ~/list-examples-grader]
+```
 ![Image](Screenshot 2023-12-03 175248.png)
 ![Image](Screenshot 2023-12-03 175252.png)
 I modified the files `TestListExamples.java` and `ListExamples.java`. The file `TestListExamples.java` has 3 methods `testCrissCrossFirstLonger()`, `testCrissCrossSecondLonger()`, and `testCrissCrossEqualLength()`. The 1st method has `first` arraylist with elements `"a", "c", "e", "f"`, `second` arraylist with elements `"d", "b"`; the 2nd method has `first` arraylist with elements `"a", "c"`, `second` arraylist with elements `"f", "e", "d", "b"`; and the 3rd method has `first` arraylist with elements `"a", "c", "e"`, `second` arraylist with elements `"f", "d", "b"`.
