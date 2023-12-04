@@ -9,8 +9,8 @@
 2. Have you tried testing `merge()` on 2 arrays in all possible scenarios? Where array 1 is longer than 2, where array 2 is longer than 1, and where they're both equal. It may also be advantageous to have multiple `System.out.println()` statements that print the element.
 
 3. Terminal output of resulting attempt:
-![Image](Screenshot 2023-12-03 171527.png)
-![Image](Screenshot 2023-12-03 171532.png)
+![Image](Screenshot 2023-12-03 172355.png)
+![Image](Screenshot 2023-12-03 172359.png)
 From this information, we can gather that the issue is that the second arraylist elements are being inserted into the even indices instead of the odd ones. We also know that the loop that adds the elements of the second arraylist is terminating one element short.
 
 5.
@@ -45,7 +45,7 @@ class ListExamples {
 }
 ```
 
-### Befire fixing bug `TestListExamples.java` file
+### Before fixing bug `TestListExamples.java` file
 
 ```
 import static org.junit.Assert.*;
@@ -99,7 +99,7 @@ java -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnit
 
 The command I used in the terminal was `bash grade.sh` + `<Enter>` which compiled the java files and ran the JUnit tests in `ListExamples.java` and printed the result to the terminal.
 
-To fix the bug, I had to change 2 lines in the `ListExamples.java` file:
+To fix the bug, I had to change 2 lines in the `ListExamples.java` file and add a new conditional:
 
 ```
 for (int i = 0; i < list2.size() - 1; i++) {
@@ -110,10 +110,14 @@ to the following:
 
 ```
 for (int i = 0; i < list2.size(); i++) {
+    if (output.size() < i * 2 + 1){
+        output.add(list2.get(list2.size() - 1 - i));
+        continue;
+    }
     output.add(i * 2 + 1, list2.get(list2.size() - 1 - i));
 ```
 
-The first change was changing the range of `list2` from `i < list2.size() - 1` to `i < list2.size()` because the original was stopping short of one element in the second list. The second change was changing the `i * 2` to `i * 2 + 1` in the second line because the former started with the element at index 0 when it was supposed to start with the element at index 1.
+The first change was changing the range of `list2` from `i < list2.size() - 1` to `i < list2.size()` because the original was stopping short of one element in the second list. The second change was changing the `i * 2` to `i * 2 + 1` in the second line because the former started with the element at index 0 when it was supposed to start with the element at index 1. The new conditional statement checks `output.size() < i * 2 + 1` if the index to insert an element into lies outside the range of the output array. If it does, then the elements should just be appended to the end, instead of inserting at an index that does not exist.
 
 None of the other files were modified.
 
