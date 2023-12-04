@@ -8,7 +8,7 @@ Hi, I'm trying to test and correct this implementation of the `crissCross()` met
 ![Image](Screenshot 2023-12-03 174237.png)
 
 2. TA Response:
-Have you tried testing `merge()` on 2 arrays in all possible scenarios? Where array 1 is longer than 2, where array 2 is longer than 1, and where they're both equal. It may also be advantageous to have multiple `System.out.println()` statements that print the element.
+Have you tried testing `merge()` on 2 arrays in all possible scenarios? Where array 1 is longer than 2, where array 2 is longer than 1, and where they're both equal. It may also be advantageous to have multiple `System.out.println()` statements that print the element and their indices.
 
 3. Terminal output of resulting attempt:
 ![Image](Screenshot 2023-12-03 172355.png)
