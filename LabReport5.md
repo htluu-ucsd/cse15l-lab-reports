@@ -17,10 +17,30 @@ From this information, we can gather that the issue is that the second arraylist
 ![Image](Screenshot 2023-12-03 173224.png)
 This is a hidden bug that could only be found after we addressed the above issues. The last bit of information we find is that if the second arraylist is longer than the first, the elements are being inserted into indices that do not exist.
 
-4.
+4. The file structure:
 The system and file structure are similar to the one provided in lab. We have the directory `list-examples-grader` where the files are located, the program testing and debugging is taking place, and is the working directory from which we run the bash script. Inside, we have the `lib` subdirectory of `list-examples-grader` where the `hamcrest-core-1.3.jar` and `junit-4.13.2.jar` files are located. These files are necessary to run JUnit tests. Also inside `list-examples-grader` directory, we have the `ListExamples.java` file which is the java project to test and debug, and we have the `TestListExamples.java` file where our JUnit tests are written to test that `ListExamples.java` methods are working as intended. Also inside `list-examples-grader` directory, we have the `grade.sh` bash script that creates the `grading-area` directory within `list-examples-grader` directory; then copies the `lib` directory and both java files into it. The script then compiles and runs the java files. It prints into the terminal, the result of the JUnit test.
 
-The file structure:
+I ran `tree` in my `home directory` and got the following output:
+```
+.
+└── list-examples-grader
+    ├── grade.sh
+    ├── grading-area
+    │ ├── lib
+    │ │ ├── hamcrest-core-1.3.jar
+    │ │ └── junit-4.13.2.jar
+    │ ├── ListExamples.class
+    │ ├── ListExamples.java
+    │ ├── TestListExamples.class
+    │ └── TestListExamples.java
+    ├── lib
+    │ ├── hamcrest-core-1.3.jar
+    │ └── junit-4.13.2.jar
+    ├── ListExamples.java
+    └── TestListExamples.java
+```
+
+Image of file structure:
 ![Image](Screenshot 2023-12-03 164924.png)
 
 ### Before fixing bug `ListExamples.java` file:
@@ -128,6 +148,7 @@ java -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnit
 ```
 
 The command I used in the terminal was `bash grade.sh` + `<Enter>` which compiled the java files and ran the JUnit tests in `TestListExamples.java` and printed the result to the terminal.
+Within the `TestListExamples.java` file, I had 1 JUnit test initially `testCrissCross()` which had the `first` arraylist with elements `"a", "c", "e"` and the `second` arraylist with elements `"f", "d", "b"`. The `merge` arraylust created a new arraylist that used the `crissCross` method on the `first` and `second` arraylist. The `expected` variable contains the arraylist with the elements in the order I expected. The error was caught by the `assertEquals(expected, merged)` line because the `expected` arraylist has elements `"a", "b", "c", "d", "e", "f"` but the `merge` arraylist has elements `"b", "a", "d", "c", "e"` which do not match and threw an `AssertionError`.
 
 Following the TA suggestion, I modified the `TestListExamples.java` file and added more tests:
 ```
@@ -168,6 +189,9 @@ public class TestListExamples {
   }
 }
 ```
+
+Running the `bash grade.sh` in the terminal again, now `testCrissCrossSecondLonger()` catches an issue whereas `testCrissCrossEqualLength()` and `testCrissCrossFirstLonger()` do not catch any issues. The issue in `testCrissCrossSecondLonger()` was that the `first` arraylist had `"a", "c"` elements and the `second` arraylist had `"f", "e", "d", "b"` elements. The issue happened when calling `ListExamples.crissCross(first, second)` which caught an `IndexOutOfBoundsException` exception.
+
 
 To fix the bug, I had to change 2 lines in the `ListExamples.java` file and add a new conditional:
 
