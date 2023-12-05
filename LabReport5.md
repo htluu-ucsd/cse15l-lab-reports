@@ -95,6 +95,7 @@ class ListExamples {
   static List<String> crissCross(List<String> list1, List<String> list2) {
         List<String> output = new ArrayList<>(); //(list1.size()+list2.size());
 
+        //add elements of list1 to output
         for (String i: list1){
           output.add(i);
         }
@@ -102,7 +103,6 @@ class ListExamples {
         // Insert elements from list2 in reverse order
         for (int i = 0; i < list2.size() - 1; i++) {
             output.add(i * 2, list2.get(list2.size() - 1 - i));
-            //System.out.println("Element added: " + list2.get(list2.size() - 1 - i) + ", at index: " + output.indexOf(list2.get(list2.size() - 1 - i)));
         }
 
         return output;
@@ -121,6 +121,7 @@ class ListExamples {
   static List<String> crissCross(List<String> list1, List<String> list2) {
         List<String> output = new ArrayList<>(); //(list1.size()+list2.size());
 
+        //add elements of list1 to output
         for (String i: list1){
           output.add(i);
         }
@@ -128,7 +129,8 @@ class ListExamples {
         // Insert elements from list2 in reverse order
         for (int i = 0; i < list2.size(); i++) {
             output.add(i * 2 + 1, list2.get(list2.size() - 1 - i));
-            //System.out.println("Element added: " + list2.get(list2.size() - 1 - i) + ", at index: " + output.indexOf(list2.get(list2.size() - 1 - i)));
+            System.out.println("Element added: " + list2.get(list2.size() - 1 - i) +
+                ", at index: " + output.indexOf(list2.get(list2.size() - 1 - i)));
         }
 
         return output;
@@ -162,20 +164,24 @@ public class TestListExamples {
 ### Before fixing bug `grade.sh` file:
 
 ```
-CPATH='.:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar'
-
+#clears directory from prior use
 rm -rf grading-area
 
+#sets up directory for present use
 mkdir grading-area
 
+#copies over the java files and directory with jar files to the directory for compiling, testing, and grading
 cp *.java ./grading-area
 cp ./ListExamples.java ./grading-area
 cp -r ./lib ./grading-area
 
+#moves working directory
 cd grading-area
 
+#compiles all java files
 javac -cp .:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar *.java
 
+#checks if java files compile properly
 if [[ $? == 0 ]]
 then
     echo "Compiled successfully!"
@@ -184,7 +190,7 @@ else
     exit
 fi
 
-
+#runs the JUnit tests in TestListExamples.java
 java -cp .:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar org.junit.runner.JUnitCore TestListExamples
 ```
 
