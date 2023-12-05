@@ -47,7 +47,7 @@ Tests run: 3,  Failures: 3
 
 ![Image](Screenshot 2023-12-03 175248.png)
 ![Image](Screenshot 2023-12-03 175252.png)
-I modified the files `TestListExamples.java` and `ListExamples.java`. The file `TestListExamples.java` has 3 methods `testCrissCrossFirstLonger()`, `testCrissCrossSecondLonger()`, and `testCrissCrossEqualLength()`. The 1st method has `first` arraylist with elements `"a", "c", "e", "f"`, `second` arraylist with elements `"d", "b"`; the 2nd method has `first` arraylist with elements `"a", "c"`, `second` arraylist with elements `"f", "e", "d", "b"`; and the 3rd method has `first` arraylist with elements `"a", "c", "e"`, `second` arraylist with elements `"f", "d", "b"`.
+I modified the files `TestListExamples.java` and `ListExamples.java`. The file `TestListExamples.java` has 3 methods `testCrissCrossFirstLonger()`, `testCrissCrossSecondLonger()`, and `testCrissCrossEqualLength()`. Each method will have 4 arraylists, `first`, `second`, `merge`, and `expected`. The 1st method has `first` arraylist with elements `"a", "c", "e", "f"`, `second` arraylist with elements `"d", "b"`; the 2nd method has `first` arraylist with elements `"a", "c"`, `second` arraylist with elements `"f", "e", "d", "b"`; and the 3rd method has `first` arraylist with elements `"a", "c", "e"`, `second` arraylist with elements `"f", "d", "b"`.
 The `ListExamples.java` has a new line `System.out.println("Element added: " + list2.get(list2.size() - 1 - i) + ", at index: " + output.indexOf(list2.get(list2.size() - 1 - i)));`, which will print the indices and values of each element to be added to the resulting `merge` arraylist.
 
 I typed `bash grade.sh` + `<Enter>` as mentioned above.
@@ -55,13 +55,13 @@ Running the tests, I can see in all 3 methods, the elements of the `second` arra
 I then proceed to modify the `ListExamples.java` file at the line: `i < list2.size() - 1` to `i < list2.size()` and at the line `i * 2` to `i * 2 + 1`. More detail for the java files are given at 4 below.
 
 ![Image](Screenshot 2023-12-03 173224.png)
-This is a hidden `IndexOutOfBoundsException` bug that could only be found after we addressed the above issues. It was caught in the `testCrissCrossSecondLonger()` method. The last bit of information we find is that if the `second` arraylist is longer than the `first`, the elements are being inserted into indices that do not exist.
+This is a hidden `IndexOutOfBoundsException` bug that could only be found after we addressed the above issues. It was caught in the `testCrissCrossSecondLonger()` method at the method call `crissCross(first, second)`. The last bit of information we find from this is that if the `second` arraylist is longer than the `first`, the elements are being inserted into indices that do not exist.
 
 ### Q4. Additional Info
 The file structure:
 The system and file structure are similar to the one provided in lab. We have the directory `list-examples-grader` where the files are located, the program testing and debugging is taking place, and is the working directory from which we run the bash script. Inside, we have the `lib` subdirectory of `list-examples-grader` where the `hamcrest-core-1.3.jar` and `junit-4.13.2.jar` files are located. These files are necessary to run JUnit tests. Also inside `list-examples-grader` directory, we have the `ListExamples.java` file which is the java project to test and debug, and we have the `TestListExamples.java` file where our JUnit tests are written to test that `ListExamples.java` methods are working as intended. Also inside `list-examples-grader` directory, we have the `grade.sh` bash script that creates the `grading-area` directory within `list-examples-grader` directory; then copies the `lib` directory and both java files into it. The script then compiles and runs the java files. It prints into the terminal, the result of the JUnit test.
 
-I typed `tree` + `<Enter>` in my `home directory` and got the following output:
+I typed `tree` + `<Enter>` in my `home` directory and got the following output:
 ```
 .
 └── list-examples-grader
@@ -234,14 +234,14 @@ public class TestListExamples {
 Running the `bash grade.sh` in the terminal again, now `testCrissCrossSecondLonger()` catches an issue whereas `testCrissCrossEqualLength()` and `testCrissCrossFirstLonger()` do not catch any issues. The issue in `testCrissCrossSecondLonger()` was that the `first` arraylist had `"a", "c"` elements and the `second` arraylist had `"f", "e", "d", "b"` elements. The issue happened when calling `ListExamples.crissCross(first, second)` which caught an `IndexOutOfBoundsException` exception.
 
 
-To fix the bug, I had to change 2 lines in the `ListExamples.java` file and add a new conditional:
+To fix the bug, I had to change 2 lines in the `ListExamples.java` file and add a new conditional. The old code is:
 
 ```
 for (int i = 0; i < list2.size() - 1; i++) {
     output.add(i * 2, list2.get(list2.size() - 1 - i));
 ```
 
-to the following:
+changed to the following:
 ```
 for (int i = 0; i < list2.size(); i++) {
     if (output.size() < i * 2 + 1){
@@ -249,10 +249,11 @@ for (int i = 0; i < list2.size(); i++) {
         continue;
     }
     output.add(i * 2 + 1, list2.get(list2.size() - 1 - I));
-    System.out.println("Element added: " + list2.get(list2.size() - 1 - i) + ", at index: " + output.indexOf(list2.get(list2.size() - 1 - i)));
+    System.out.println("Element added: " + list2.get(list2.size() - 1 - i) +
+            ", at index: " + output.indexOf(list2.get(list2.size() - 1 - i)));
 ```
 
-The first change was changing the range of `list2` from `i < list2.size() - 1` to `i < list2.size()` because the original was stopping short of one element in the second list. The second change was changing the `i * 2` to `i * 2 + 1` in the second line because the former started with the element at index 0 when it was supposed to start with the element at index 1. The unexpected symptom that appeared after we made the above changes is corrected with a new conditional statement that checks `output.size() < i * 2 + 1` if the index to insert an element into lies outside the range of the output array. If it does, then the elements should just be appended to the end, instead of inserting at an index that does not exist. This goes to show that doing multiple tests are a good measure because we become aware of some bugs only after addressing a different bug. The last line with `System.out.println()` was for testing purposes, to see the elements and indices and is not needed to get the correct output but was useful for figuring out what went wrong.
+The first change was changing the range of `list2` from `i < list2.size() - 1` to `i < list2.size()` because the original was stopping short of one element in the second list. The second change was changing the `i * 2` to `i * 2 + 1` in the second line because the the `second` arraylist started inserting with the element at index 0 when it was supposed to start with the element at index 1. The unexpected symptom that appeared after we made the above changes is corrected with a new conditional statement that checks `output.size() < i * 2 + 1` if the index to insert an element into lies outside the range of the output array. If it does, then the elements should just be appended to the end, instead of inserting at an index that does not exist. This goes to show that doing multiple tests are a good measure because we become aware of some bugs only after addressing a different bug. The last line with `System.out.println()` was for testing purposes, to see the elements and indices and is not needed to get the correct output but was useful for figuring out what went wrong.
 
 The `test.sh` file was unmodified.
 
